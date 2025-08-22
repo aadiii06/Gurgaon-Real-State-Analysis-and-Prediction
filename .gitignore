@@ -1,6 +1,6 @@
-# Ignore everything inside real-estate-app
-real-estate-app/*
+# Ignore all .pkl and .csv in real-estate-app
+real-estate-app/*.pkl
+real-estate-app/*.csv
 
-# But keep only python files inside real-estate-app
-!real-estate-app/home.py
-!real-estate-app/**/*.py
+# Ignore datasets folder inside real-estate-app
+real-estate-app/datasets/
