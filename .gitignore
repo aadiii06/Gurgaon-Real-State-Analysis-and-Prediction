@@ -1,0 +1,5 @@
+*
+!.gitignore
+!/real-estate-app/
+!/real-estate-app/home.py
+!/real-estate-app/**/*.py
