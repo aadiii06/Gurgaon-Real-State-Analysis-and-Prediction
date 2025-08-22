@@ -1,5 +1,6 @@
-*
-!.gitignore
-!/real-estate-app/
-!/real-estate-app/home.py
-!/real-estate-app/**/*.py
+# Ignore everything inside real-estate-app
+real-estate-app/*
+
+# But keep only python files inside real-estate-app
+!real-estate-app/home.py
+!real-estate-app/**/*.py
