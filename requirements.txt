@@ -11,3 +11,4 @@ wordcloud
 nltk
 requests
 gdown
+scikit-learn==1.5.2
