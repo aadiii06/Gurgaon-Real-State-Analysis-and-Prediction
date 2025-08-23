@@ -2,14 +2,39 @@ import streamlit as st
 import pickle
 import pandas as pd
 import numpy as np
+import gdown
 
-st.set_page_config()
+# st.set_page_config()
 
+# with open('df.pkl', 'rb') as file:
+#     df = pickle.load(file)
+    
+# with open('pipeline.pkl', 'rb') as file:
+#     pipeline = pickle.load(file)
+st.set_page_config(page_title="Real Estate App")  # you can customize the title
+
+# Google Drive file URLs
+file_urls = {
+    "df.pkl": "https://drive.google.com/uc?id=1m3grj1AozNESDIyYi4zrmh3qtl5srSS3",
+    "pipeline.pkl": "https://drive.google.com/uc?id=1crwpwhkLjc5qsFyahm9gAitpDNf28Jtb"
+}
+
+# Download files if they don't exist
+for filename, url in file_urls.items():
+    try:
+        with open(filename, 'rb'):
+            pass  # file exists
+    except FileNotFoundError:
+        st.write(f"Downloading {filename}...")
+        gdown.download(url, filename, quiet=False)
+
+# Load the pickle files
 with open('df.pkl', 'rb') as file:
     df = pickle.load(file)
-    
+
 with open('pipeline.pkl', 'rb') as file:
     pipeline = pickle.load(file)
+
 
 st.header("Enter your inputs: ")
 

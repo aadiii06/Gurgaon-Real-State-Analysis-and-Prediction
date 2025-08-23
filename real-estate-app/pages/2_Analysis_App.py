@@ -9,13 +9,36 @@ import pickle
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 import seaborn as sns
+import gdown
+import os
 
 st.set_page_config(page_title="Plotting Demo")
 
 st.title("Analytics")
 
-new_df = pd.read_csv('datasets/data_viz1.csv')
-feature_text = pickle.load(open('datasets/feature_text.pkl', 'rb'))
+# new_df = pd.read_csv('datasets/data_viz1.csv')
+# feature_text = pickle.load(open('datasets/feature_text.pkl', 'rb'))
+# Google Drive file URLs
+# Google Drive file URLs
+file_urls = {
+    "datasets/new_df.csv": "https://drive.google.com/uc?id=14DKVvjqzmmQ-aGPDwuiM1AydG1ItKA7Z",
+    "datasets/feature_text.pkl": "https://drive.google.com/uc?id=1cOr4UNRmeMTPDnd8NygL-YldrEW6ZMuv"
+}
+
+# Ensure the datasets folder exists
+os.makedirs("datasets", exist_ok=True)
+
+# Download files if they don't exist
+for filename, url in file_urls.items():
+    if not os.path.exists(filename):
+        st.write(f"Downloading {filename}...")
+        gdown.download(url, filename, quiet=False)
+
+# Load the files
+new_df = pd.read_csv('datasets/new_df.csv')
+with open('datasets/feature_text.pkl', 'rb') as f:
+    feature_text = pickle.load(f)
+
 
 group_df = (
     new_df

@@ -2,13 +2,41 @@ import streamlit as st
 import pickle
 import pandas as pd
 import numpy as np
+import gdown
+import os
 
 st.set_page_config(page_title="Recommend Apartments")
 
-location_df = pickle.load(open('datasets/location_distance.pkl', 'rb'))
-cosine_sim1 = pickle.load(open('datasets/cosine_sim1.pkl', 'rb'))
-cosine_sim2 = pickle.load(open('datasets/cosine_sim2.pkl', 'rb'))
-cosine_sim3 = pickle.load(open('datasets/cosine_sim3.pkl', 'rb'))
+# location_df = pickle.load(open('datasets/location_distance.pkl', 'rb'))
+# cosine_sim1 = pickle.load(open('datasets/cosine_sim1.pkl', 'rb'))
+# cosine_sim2 = pickle.load(open('datasets/cosine_sim2.pkl', 'rb'))
+# cosine_sim3 = pickle.load(open('datasets/cosine_sim3.pkl', 'rb'))
+
+file_urls = {
+    "datasets/location_distance.pkl": "https://drive.google.com/uc?id=12NWxgneyg35HYq-11ZIz6b8-ev_HBrHs",
+    "datasets/cosine_sim1.pkl": "https://drive.google.com/uc?id=1u4bFVA6Zhr3Rc9dVjLZhnoSDTQKpb7Re",
+    "datasets/cosine_sim2.pkl": "https://drive.google.com/uc?id=1x2NURqL7KB-mKyHoWIUp4FIQspCfF4n3",
+    "datasets/cosine_sim3.pkl": "https://drive.google.com/uc?id=1QafdCSHttB23MlDlqcb2xKHh7mDjPf6O"
+}
+
+# Create datasets folder if it doesn't exist
+os.makedirs("datasets", exist_ok=True)
+
+# Download files if they don't exist
+for filename, url in file_urls.items():
+    if not os.path.exists(filename):
+        st.write(f"Downloading {filename}...")
+        gdown.download(url, filename, quiet=False)
+
+# Load the pickle files
+with open('datasets/location_distance.pkl', 'rb') as f:
+    location_df = pickle.load(f)
+with open('datasets/cosine_sim1.pkl', 'rb') as f:
+    cosine_sim1 = pickle.load(f)
+with open('datasets/cosine_sim2.pkl', 'rb') as f:
+    cosine_sim2 = pickle.load(f)
+with open('datasets/cosine_sim3.pkl', 'rb') as f:
+    cosine_sim3 = pickle.load(f)
 
 def recommend_properties_with_scores(property_name, top_n=5):
     # Weighted combination (now it won't be overwritten)
