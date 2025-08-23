@@ -25,9 +25,6 @@ for filename, url in file_urls.items():
         st.write(f"Downloading {filename}...")
         gdown.download(url, filename, quiet=False)
 
-# Verify the files exist
-st.write("Files in current folder:", os.listdir())
-
 # Load pickle files safely
 try:
     with open('df.pkl', 'rb') as file:
