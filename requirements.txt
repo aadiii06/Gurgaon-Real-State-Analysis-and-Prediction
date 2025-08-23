@@ -9,3 +9,5 @@ plotly
 folium
 wordcloud
 nltk
+requests
+gdown
